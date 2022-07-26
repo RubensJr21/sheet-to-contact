@@ -13,7 +13,11 @@ const List = () => {
         dataTable: { head: colunasExt }
     } = useContext(TableContext) as ITableContext;
     
-    const [colunas, setColunas] = useState<Array<string>>(colunasExt)
+    const colunasToIgnore = ["número", "numero", "celular", "cel"]
+
+    const [colunas, setColunas] = useState<Array<string>>(colunasExt.filter((coluna: string) => {
+        return !colunasToIgnore.includes(coluna);
+    }))
 
     // console.log(colunas, colunasExt)
 

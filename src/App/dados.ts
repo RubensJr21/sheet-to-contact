@@ -6,8 +6,9 @@ const numberBetween = (floorNumber: number, topNumber: number) => {
     return numbers[pos];
 }
 
-// gera número entre 0 e 4, somando mais 1 fica entre 1 e 5
-const qtdColunas = Math.floor(Math.random() * 4) + 1
+// gera número entre 0 e 4, somando mais 1 fica entre 2 e 5
+// Mínimo de duas colunas
+const qtdColunas = Math.floor(Math.random() * 4) + 2
 // gera número entre 0 e 15, somando mais 1 fica entre 1 e 16
 const qtdRegistros = Math.floor(Math.random() * 15) + 1
 
@@ -45,9 +46,6 @@ for (let indexR = 0; indexR < qtdRegistros; indexR++) {
             // Obs: desconsidera-se o numero começar com o 9 ou 8, apenas a quantidade de dígitos é validado
             const numberTmp = `${Math.floor(Math.random() * (10 ** digits))}`
             const numberFull = false ? numberTmp : (!verifyNumber(numberTmp, digits)) ? numberTmp : fixNumber(numberTmp, digits)
-            console.log({
-                numberFull
-            })
             // Se o numero tiver 9 dígitos quer dizer que antes do traço ele terá 5 números
             // Se não quer dizer que o número passado, neste teste, será 8, por tanto, terá
             // 4 número antes do traço
@@ -62,7 +60,6 @@ for (let indexR = 0; indexR < qtdRegistros; indexR++) {
                 // Sorteia se o registro será um registro válido ou não
                 // Usado para aplicar a classe danger
                 const isValid = Math.floor(Math.random() * 10) === 5
-                console.log({isValid})
                 return getPhoneNumber(isValid)
             }
         }

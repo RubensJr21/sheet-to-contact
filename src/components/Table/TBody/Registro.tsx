@@ -15,6 +15,7 @@ const Registro = (props: {index: number, dados: ItemBody}) => {
         if(keys.includes("número"))         fullMatch = fullMatch && pathPhone.test(registro["número"])
         else if(keys.includes("numero"))    fullMatch = fullMatch && pathPhone.test(registro["numero"])
         else if(keys.includes("celular"))   fullMatch = fullMatch && pathPhone.test(registro["celular"])
+        else if(keys.includes("cel"))   fullMatch = fullMatch && pathPhone.test(registro["cel"])
         
         if(keys.includes("cpf"))            fullMatch = fullMatch && (pathCpf_1.test(registro["cpf"]) || pathCpf_2.test(registro["cpf"]))
         return fullMatch
