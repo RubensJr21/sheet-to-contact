@@ -1,0 +1,11 @@
+.max-vh-35{
+    max-height: 35vh!important;
+}
+
+.cursor-move{
+    cursor: move
+}
+
+.cursor-pointer{
+    cursor: pointer
+}
