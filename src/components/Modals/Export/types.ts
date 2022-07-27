@@ -1,9 +1,10 @@
 export type ColunaType = [
 	number,
-	string
+	string,
+	boolean
 ]
 
 export type ColunaContextType = {
-	colSelect: Array<ColunaType>,
-	setColSelect: CallableFunction
+	colunas: Array<ColunaType>,
+	setColunas: CallableFunction
 }

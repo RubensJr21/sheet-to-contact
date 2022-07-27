@@ -1,40 +1,32 @@
-import React, { ChangeEvent, DragEvent, useContext, useRef, useState } from "react";
+import React, { ChangeEvent, DragEvent, useContext, useRef } from "react";
 import { ColunaType } from '../types'
 import { ColunaContext } from '../index'
-
-import { ITableContext } from '../../../Table/types'
-import { TableContext } from "../../../../Contexts/Table";
 
 import './index.css'
 
 const List = () => {
-    const { colSelect, setColSelect } = useContext(ColunaContext);
-    const {
-        dataTable: { head: colunasExt }
-    } = useContext(TableContext) as ITableContext;
-    
-    const colunasToIgnore = ["número", "numero", "celular", "cel"]
-
-    const [colunas, setColunas] = useState<Array<string>>(colunasExt.filter((coluna: string) => {
-        return !colunasToIgnore.includes(coluna);
-    }))
+    const { colunas, setColunas } = useContext(ColunaContext);
 
     // console.log(colunas, colunasExt)
 
-    const addCol = (index: any, coluna: string) => {
+    const addCol = (colunaName: string) => {
 		// ordenar com base no index
-		let _colSelect:Array<ColunaType> = [...colSelect, [index, coluna]]
-		_colSelect = _colSelect.sort((a:ColunaType, b:ColunaType) => {
-			return a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0;
-		})
-		setColSelect(_colSelect)
+		let _colunas:Array<ColunaType> = colunas.map((coluna: ColunaType) => {
+            return coluna[1] === colunaName ? [coluna[0], coluna[1], true] : coluna
+        })
+		// _colunas = _colunas.sort((a:ColunaType, b:ColunaType) => {
+		// 	return a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0;
+		// })
+		setColunas(_colunas)
 	}
-    const rmCol = (index: number) => setColSelect(colSelect.filter((col: ColunaType) => col[0] !== index))
+    const rmCol = (colunaName: string) => setColunas(colunas.map((coluna: ColunaType) => {
+        return coluna[1] === colunaName ? [coluna[0], coluna[1], false] : coluna
+    }))
     
-    const onChangeCheckBox = (e:ChangeEvent<HTMLInputElement>, index: number, coluna: string) => {
+    const onChangeCheckBox = (e:ChangeEvent<HTMLInputElement>, index: number, colunaName: string) => {
 		const chBx: HTMLInputElement = e.target
-		if(chBx.checked) addCol(index, coluna)
-		else rmCol(index)
+		if(chBx.checked) addCol(colunaName)
+		else rmCol(colunaName)
 	}
 
     const onDrag = (e:DragEvent<HTMLLIElement>, index:number) => {
@@ -75,7 +67,7 @@ const List = () => {
 
     return (
         <ul className="list-group max-vh-35 overflow-auto mb-3">
-            {colunas.map((coluna: string, index: number) => {
+            {colunas.map((coluna: ColunaType, index: number) => {
                 return (
                     <li key={index} className="list-group-item align-middle cursor-move" draggable
                         onDragStart={(e) => onDragStart(e, index)}
@@ -83,9 +75,12 @@ const List = () => {
                         onDragEnd={(e) => onDragEnd(e, index)}
                         onDragOver={(e) => e.preventDefault()}
                     >
-                        <input id={`coluna-${index + 1}`} className="form-check-input me-1 cursor-pointer" type="checkbox" onChange={(e) => onChangeCheckBox(e, index, coluna)}/>
+                        <input id={`coluna-${index + 1}`} className="form-check-input me-1 cursor-pointer" type="checkbox"
+                            checked={coluna[2]}
+                            // onClick={}
+                            onChange={(e) => onChangeCheckBox(e, index, coluna[1])}/>
                         <label className="form-check-label cursor-pointer" htmlFor={`coluna-${index + 1}`}>
-                            {`${index + 1}. ${coluna}`}
+                            {`${index + 1}. ${coluna[1]}`}
                         </label>
                     </li>
                 )

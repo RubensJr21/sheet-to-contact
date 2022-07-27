@@ -3,11 +3,16 @@ import { ColunaType } from '../types'
 import { ColunaContext } from '../index'
 
 const InputPrefix = () => {
-    const { colSelect } = useContext(ColunaContext);
+    const { colunas } = useContext(ColunaContext);
     
     const formatoContato = (): string => {
-		return colSelect.map((item: ColunaType) => item[1]).join("_")
+        const colunasFiltred = colunas.filter((item: ColunaType) => item[2] === true)
+        const colunasName = colunasFiltred.map((item: ColunaType) => item[1])
+        // console.log(colunasName)
+        return colunasName.length > 0 ? colunasName.join("_") : ""
 	}
+
+    // console.log({colunas})
 
     return(
         <div className="input-group mb-3">
