@@ -1,16 +1,18 @@
 import React, { useState, createContext, useContext } from "react";
 import { TableContext } from "../../../Contexts/Table";
-import { ITableContext } from "../../Table/types";
+import { ITableContext, ItemBody } from "../../Table/types";
 import InputPrefix from "./InputPrefix";
 import List from "./List";
+import { getCSV, IRow } from "./Templates/csv";
 
-import { ColunaType, ColunaContextType } from './types'
+import { ColunaType, ColunaContextType, PrefixContextType } from './types'
 
 export const ColunaContext = createContext({} as ColunaContextType);
+export const PrefixContext = createContext({} as PrefixContextType);
 
 const Export = () => {
 	const {
-        dataTable: { head: colunasExt }
+        dataTable: { head: colunasExt, body: registros }
     } = useContext(TableContext) as ITableContext;
     
     const colunasToIgnore = ["número", "numero", "celular", "cel"]
@@ -23,8 +25,37 @@ const Export = () => {
 		return [index, colunaName, false]
 	}))
 
+	const [prefix, setPrefix] = useState<string>("")
+
 	const gerarContatos = () => {
-		console.log(colunas)
+		const filtredColunas = colunas.filter((coluna: ColunaType) => coluna[2] === true)
+		const columnsToContact = filtredColunas.map(( item:ColunaType ) => {
+			return item[1]
+		})
+		const getContactColumn = (registro: ItemBody) => {
+			const keysFromRegistry = Object.keys(registro)
+			for (let index = 0; index < keysFromRegistry.length; index++) {
+				const coluna: string = keysFromRegistry[index];
+				if(colunasToIgnore.includes(coluna)){
+					return coluna;
+				}
+			}
+			return ""
+		}
+		const r = registros.map((registro: ItemBody): IRow => {
+			const registryToContact = columnsToContact.map((coluna:string) => {
+				return registro[coluna]
+			})
+			const contactColumn = getContactColumn(registro)
+			const name = `${prefix}_${registryToContact.join("_")}`
+			const number = contactColumn !== "" ? registro[contactColumn] : "";
+			const row: IRow = {name , number};
+			return row;
+		})
+		console.log("Export:index:53", registros)
+		console.log("Export:index:54", r)
+		const csv = getCSV(r)
+		console.log(csv)
 	}
 
 	return (
@@ -42,7 +73,9 @@ const Export = () => {
 							Escolha ordem e as colunas para gerar o contato:
 						</h6>
 						<List />
-						<InputPrefix />
+						<PrefixContext.Provider value={{prefix, setPrefix}}>
+							<InputPrefix />
+						</PrefixContext.Provider>
 						* Criar csv de download
 					</ColunaContext.Provider>
 				</div>
