@@ -9,11 +9,8 @@ const InputPrefix = () => {
     const formatoContato = (): string => {
         const colunasFiltred = colunas.filter((item: ColunaType) => item[2] === true)
         const colunasName = colunasFiltred.map((item: ColunaType) => item[1])
-        // console.log(colunasName)
         return colunasName.length > 0 ? colunasName.join("_") : ""
 	}
-
-    // console.log({colunas})
 
     const onChange = (e:ChangeEvent<HTMLInputElement>) => {
         setPrefix(e.target.value)

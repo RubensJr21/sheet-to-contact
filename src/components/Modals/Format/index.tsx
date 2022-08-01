@@ -10,7 +10,6 @@ const Format = () => {
     const { dataTable, setDataTable } = useContext(TableContext) as ITableContext
 
     const onSaveFormat = (e:MouseEvent<HTMLButtonElement>): void => {
-        // console.log("Linha 13:", dataFormat)
         const {index, registro} = dataFormat
         const { body } = dataTable
 
@@ -22,8 +21,6 @@ const Format = () => {
         }
         
         setDataTable(dataSave)
-        
-        // console.log("Save format...")
     }
 
     const onChangeValue = (e:ChangeEvent<HTMLInputElement>, keyOut: string) => {

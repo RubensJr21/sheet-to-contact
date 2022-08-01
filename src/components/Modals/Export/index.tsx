@@ -52,8 +52,6 @@ const Export = () => {
 			const row: IRow = {name , number};
 			return row;
 		})
-		console.log("Export:index:53", registros)
-		console.log("Export:index:54", r)
 		const csv = getCSV(r)
 		console.log(csv)
 	}

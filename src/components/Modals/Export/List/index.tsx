@@ -7,8 +7,6 @@ import './index.css'
 const List = () => {
     const { colunas, setColunas } = useContext(ColunaContext);
 
-    // console.log(colunas, colunasExt)
-
     const addCol = (colunaName: string) => {
 		// ordenar com base no index
 		let _colunas:Array<ColunaType> = colunas.map((coluna: ColunaType) => {
