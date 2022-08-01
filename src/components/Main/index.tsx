@@ -1,33 +1,27 @@
-import React, { createContext, useState } from "react";
+import React, { useContext } from "react";
+import { ErrorContext } from "../../Contexts/ErrorInput";
+import { InputCsvProvider } from "../../Contexts/InputCsv";
 
-import ModalErrorInput from "../Modals/Errors/Input";
-import { IError } from "../Modals/Errors/Input/types"
-import Alert from "./Alert";
+
+import AlertOfColumn from "./Alert/AlertOfColumn";
+import AlertErrorInput from "./Alert/AlertErrorInput";
 import InputByInputFile from "./InputByInputFile";
 import InputByText from "./InputByTextArea"
 
-import { IErrorContext, IInputCsvContext } from "./types";
-
-export const InputCsvContext = createContext({} as IInputCsvContext)
-export const ErrorContext = createContext({} as IErrorContext)
-
 const Main = () => {
-  const [error, setError] = useState<IError>({} as IError)
-  const [inputCsv, setInputCsv] = useState<string>("")
+  const { error } = useContext(ErrorContext)
 
   return (
   <>
     <div className="bg-dark w-100 vh-100 d-flex flex-column align-items-center justify-content-center">
-      <Alert />
-      <ErrorContext.Provider value={{error, setError}}>
-        <InputCsvContext.Provider value={{inputCsv, setInputCsv}}>
-          <InputByInputFile />
-          <p className="h1 text-bg-dark">OU</p>
-          <InputByText />
-        </InputCsvContext.Provider>
-        {/* Usar if condicional para mostrar o Modal */}
-        {Object.keys(error).length > 0 ?? <ModalErrorInput />}
-      </ErrorContext.Provider>
+      <AlertOfColumn />
+      <InputCsvProvider>
+        {error?.message ? <AlertErrorInput error={error} time={5000} /> : null}
+        {/* <AlertErrorInput error={error} time={5000} /> */}
+        <InputByInputFile />
+        <p className="h1 text-bg-dark">OU</p>
+        <InputByText />
+      </InputCsvProvider>
     </div>
   </>
   )

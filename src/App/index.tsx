@@ -6,6 +6,7 @@ import ModalFormat from '../components/Modals/Format';
 
 import { TableContext } from '../Contexts/Table';
 import { ITable, ITableContext } from '../components/Table/types';
+import { ErrorInputProvider } from '../Contexts/ErrorInput';
 
 function App() {
 	document.title = "Sheet to content"
@@ -18,7 +19,9 @@ function App() {
 
 	if(isDataEmpty(dataTable)){
 		return (
-			<Main />
+			<ErrorInputProvider>
+				<Main />
+			</ErrorInputProvider>
 		);
 	}else{
 		return (

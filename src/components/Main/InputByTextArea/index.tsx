@@ -3,12 +3,15 @@ import { TableContext } from "../../../Contexts/Table";
 import { ITable, ITableContext } from "../../Table/types";
 import { getHeadAndBody, populateTable, verifyDataCsv } from "../FunctionsOfInput";
 
-import { InputCsvContext } from "../index";
+import { InputCsvContext } from "../../../Contexts/InputCsv";
+import { ErrorContext } from "../../../Contexts/ErrorInput";
+import { IErrorContext } from "../types";
 
 const InputByTextArea = () => {
 
     const { setDataTable } = useContext(TableContext) as ITableContext
     const { inputCsv, setInputCsv } = useContext(InputCsvContext)
+    const { setError } = useContext(ErrorContext) as IErrorContext
 
     const loadCsv = (lines: Array<Array<string>>) => {
         const { head, body } = getHeadAndBody(lines)
@@ -23,8 +26,12 @@ const InputByTextArea = () => {
     const onClick = (e:MouseEvent<HTMLButtonElement>) => {
         const { isValid, lines } = verifyDataCsv(inputCsv)
         if(isValid){
-            console.log("CSV VALIDO")
             loadCsv(lines)
+        }else{
+            setError({
+                type: "texto",
+                message: "O texto não tem um formato 'csv' válido"
+            })
         }
     }
 

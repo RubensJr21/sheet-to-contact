@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { IError } from "../Modals/Errors/Input/types"
+import { IError } from "./Alert/AlertErrorInput/types"
 
 export interface IInputCsvContext {
     inputCsv: string;
@@ -8,5 +8,5 @@ export interface IInputCsvContext {
 
 export interface IErrorContext {
     error: IError;
-    setError: Dispatch<SetStateAction<IError>>
+    setError: Dispatch<SetStateAction<IError>>;
 }
