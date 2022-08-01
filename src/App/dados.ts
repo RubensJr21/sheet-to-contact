@@ -72,7 +72,11 @@ for (let indexR = 0; indexR < qtdRegistros; indexR++) {
 }
 // console.log(_body)
 
+// export const DataTable: ITable = {
+//     head: _head,
+//     body: _body
+// }
 export const DataTable: ITable = {
-    head: _head,
-    body: _body
+    head: [],
+    body: []
 }
