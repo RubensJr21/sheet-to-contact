@@ -9,8 +9,8 @@ export const verifyDataCsv = (csv: string): {isValid: boolean, lines: Array<Arra
         3. Comparar se todos as listas tem o mesmo tamanho
         4. Se estiver tudo certo passar para tela de Table
     */
-    // -1. Garante que o separador do arquivo será uma vírgula
-    csv = csv.replaceAll(";", ",");
+    // -1. Garante que o separador do arquivo será uma vírgula, logo em seguida limpa os caracteres indesejados
+    csv = csv.replaceAll(";", ",").replaceAll("\r", "");
     //  0. Inicializa variável de validação
     let isCsvValid = true;
 
