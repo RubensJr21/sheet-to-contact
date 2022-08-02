@@ -7,7 +7,7 @@ const Registro = (props: {index: number, dados: ItemBody}) => {
     // Se o campo 'número' ou 'celular' forem diferentes do formato: +XX XX XXXXX-XXXX
     // Ou Se o campo de 'cpf' for diferente do formato: XXX.XXX.XXX-XX OU XXXXXXXXXXX
     // Assume-se verifyData retorna false
-    const pathPhone : RegExp = /\+[0-9]{2} [0-9]{2} [0-9]{4,5}-[0-9]{4}/g
+    const pathPhone : RegExp = /\+[0-9]{2} [0-9]{2} [0-9]{4,5}-{0,1}[0-9]{4}/g
     const pathCpf_1 : RegExp = /[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}/g
     const pathCpf_2 : RegExp = /[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}/g
 
