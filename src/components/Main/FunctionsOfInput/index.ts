@@ -26,8 +26,7 @@ export const verifyDataCsv = (csv: string): {isValid: boolean, lines: Array<Arra
             break;
         }
     }
-
-    console.log(lines);
+    
     return {isValid: isCsvValid, lines: isCsvValid ? lines : []};
 }
 

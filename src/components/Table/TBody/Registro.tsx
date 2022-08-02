@@ -1,6 +1,7 @@
 import React from "react";
 import { ItemBody } from "../../Table/types";
 import Actions from "../Actions";
+import { numberPhoneColumns } from "../../../App/configs";
 
 const Registro = (props: {index: number, dados: ItemBody}) => {
     // Se o campo 'número' ou 'celular' forem diferentes do formato: +XX XX XXXXX-XXXX
@@ -9,15 +10,21 @@ const Registro = (props: {index: number, dados: ItemBody}) => {
     const pathPhone : RegExp = /\+[0-9]{2} [0-9]{2} [0-9]{4,5}-[0-9]{4}/g
     const pathCpf_1 : RegExp = /[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}/g
     const pathCpf_2 : RegExp = /[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}/g
+
+    const colunasOfPhoneNumber = numberPhoneColumns
+
     const verifyData = (registro : ItemBody) => {
         const keys: Array<string> = Object.keys(registro)
         let fullMatch: Boolean = true
-        if(keys.includes("número"))         fullMatch = fullMatch && pathPhone.test(registro["número"])
-        else if(keys.includes("numero"))    fullMatch = fullMatch && pathPhone.test(registro["numero"])
-        else if(keys.includes("celular"))   fullMatch = fullMatch && pathPhone.test(registro["celular"])
-        else if(keys.includes("cel"))   fullMatch = fullMatch && pathPhone.test(registro["cel"])
+        for(var nameColumn of colunasOfPhoneNumber){
+            if(keys.includes(nameColumn)){
+                fullMatch = fullMatch && pathPhone.test(registro[nameColumn])
+            }
+        }
         
-        if(keys.includes("cpf"))            fullMatch = fullMatch && (pathCpf_1.test(registro["cpf"]) || pathCpf_2.test(registro["cpf"]))
+        if(keys.includes("cpf")) {
+            fullMatch = fullMatch && (pathCpf_1.test(registro["cpf"]) || pathCpf_2.test(registro["cpf"]))
+        }
         return fullMatch
     }
     return (

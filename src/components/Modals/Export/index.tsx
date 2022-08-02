@@ -6,6 +6,7 @@ import List from "./List";
 import { getCSV, IRow } from "./Templates/csv";
 
 import { ColunaType, ColunaContextType, PrefixContextType } from './types'
+import { numberPhoneColumns } from "../../../App/configs";
 
 export const ColunaContext = createContext({} as ColunaContextType);
 export const PrefixContext = createContext({} as PrefixContextType);
@@ -15,7 +16,7 @@ const Export = () => {
         dataTable: { head: colunasExt, body: registros }
     } = useContext(TableContext) as ITableContext;
     
-    const colunasToIgnore = ["número", "numero", "celular", "cel"]
+    const colunasToIgnore = numberPhoneColumns
 
 	const filtredColuns = colunasExt.filter((coluna: string) => {
         return !colunasToIgnore.includes(coluna);
@@ -26,6 +27,33 @@ const Export = () => {
 	}))
 
 	const [prefix, setPrefix] = useState<string>("")
+
+	const downloadCSVFile = (csv_data: string) => {
+
+		// Cria objeto de arquivo CSV e feed
+		// nosso csv_data nele
+		const CSVFile = new Blob(["\ufeff", csv_data], {
+			type: "text/csv"
+		});
+	   
+		// Cria um link temporário para iniciar
+		// processo de download
+		var temp_link = document.createElement('a');
+	   
+		//Baixa o arquivo csv
+		temp_link.download = "contacts.csv";
+		var url = window.URL.createObjectURL(CSVFile);
+		temp_link.href = url;
+	   
+		// Este link não deve ser exibido
+		temp_link.style.display = "none";
+		document.body.appendChild(temp_link);
+	   
+		//Clique automaticamente no link para
+		// aciona o download
+		temp_link.click();
+		document.body.removeChild(temp_link);
+	}
 
 	const gerarContatos = () => {
 		const filtredColunas = colunas.filter((coluna: ColunaType) => coluna[2] === true)
@@ -47,12 +75,13 @@ const Export = () => {
 				return registro[coluna]
 			})
 			const contactColumn = getContactColumn(registro)
-			const name = `${prefix}_${registryToContact.join("_")}`
+			const name = `${prefix !== "" ? prefix + "_" : ""}${registryToContact.join("_")}`
 			const number = contactColumn !== "" ? registro[contactColumn] : "";
 			const row: IRow = {name , number};
 			return row;
 		})
 		const csv = getCSV(r)
+		downloadCSVFile(csv);
 		console.log(csv)
 	}
 
