@@ -9,8 +9,6 @@ import { ITable, ITableContext } from '../components/Table/types';
 import { ErrorInputProvider } from '../Contexts/ErrorInput';
 
 function App() {
-	document.title = "Sheet to content"
-
 	const { dataTable } = useContext(TableContext) as ITableContext
 
 	const isDataEmpty = (d: ITable) => {
