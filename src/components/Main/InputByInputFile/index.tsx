@@ -45,7 +45,7 @@ const InputByInputFile = () => {
     return (
     <>
         <div className="mt-3 mb-3 d-flex flex-column align-items-center">
-            <label htmlFor="fileCSV" className="form-label text-bg-dark">Selecione o arquivo com os contatos:</label>
+            <label htmlFor="fileCSV" className="form-label text-bg-dark">Selecione o arquivo .csv com os contatos:</label>
             <input className="form-control w-auto" type="file" accept=".csv" id="fileCSV"
                 onChange={onChange}/>
         </div>
