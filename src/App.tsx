@@ -8,6 +8,17 @@ import { TableContext } from './Contexts/Table';
 import { ITable, ITableContext } from './components/Table/types';
 import { ErrorInputProvider } from './Contexts/ErrorInput';
 
+// Colocar funcionalidade de transformar colunas em novos registros
+// Duplicar registro de contato usando coluna e a outra coluna que contém o dado
+// Ex.: Usar nome e contato do responsável para gerar um outro contato do aluno
+// Nome | número | Resp | Num Resp
+// Diego | xxxxxxx | Luiza | zzzzzzzzzz
+// 
+// Com ideia:
+// Nome | número
+// Diego | xxxxxxx
+// Diego (Resp. Luiza) | zzzzzzzzzz
+
 function App() {
 	const { dataTable } = useContext(TableContext) as ITableContext
 
