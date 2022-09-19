@@ -4,6 +4,7 @@ export const verifyDataCsv = (csv: string): {isValid: boolean, lines: Array<Arra
     /*
       Verificar o csv com base no tamanho das linha
       Passo:
+        0.  Inicializa variável de validação
         1.  Verificar se existe vírgula nos dados e tratar
         1.1 Caso exista vírgula nos dados ele irá trocar por <comma> antes da mudança de separador
         1.2 Muda separador
@@ -14,7 +15,7 @@ export const verifyDataCsv = (csv: string): {isValid: boolean, lines: Array<Arra
         3.  Comparar se todos as listas tem o mesmo tamanho
         4.  Se estiver tudo certo passar para tela de Table
     */
-    //  0. Inicializa variável de validação
+    // 0.
     let isCsvValid = true;
 
     // 1.
@@ -42,7 +43,7 @@ export const verifyDataCsv = (csv: string): {isValid: boolean, lines: Array<Arra
     // 1.4
     csv = csv.replaceAll("\r", "").replaceAll('"',"");
 
-    // 1.5
+    // 1.5 e 2.
     const lines = csv.split("\n").map((linha: string) => {
         return linha.split(";");
     });
@@ -55,6 +56,7 @@ export const verifyDataCsv = (csv: string): {isValid: boolean, lines: Array<Arra
         }
     }
     
+    // 4.
     return {isValid: isCsvValid, lines: isCsvValid ? lines : []};
 }
 

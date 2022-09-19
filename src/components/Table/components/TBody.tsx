@@ -1,9 +1,11 @@
 import React from "react";
-import { ItemBody } from "../../Table/types";
-import Actions from "../Actions";
-import { numberPhoneColumns } from "../../../App/configs";
+import { ItemBody } from "../types";
 
-const Registro = (props: {index: number, dados: ItemBody}) => {
+import Actions from "./Actions";
+import { numberPhoneColumns } from "../../../configs";
+
+// Registro
+const Tr = (props: {index: number, dados: ItemBody}) => {
     // Se o campo 'número' ou 'celular' forem diferentes do formato: +XX XX XXXXX-XXXX
     // Ou Se o campo de 'cpf' for diferente do formato: XXX.XXX.XXX-XX OU XXXXXXXXXXX
     // Assume-se verifyData retorna false
@@ -28,7 +30,7 @@ const Registro = (props: {index: number, dados: ItemBody}) => {
         return fullMatch
     }
     return (
-        // classe text-danger usada para os registros que tenham dados que precisam de atenção
+        // classe text-danger usada para os registros que tenham dados que precisam de atençãos
         <tr className={`align-middle${!verifyData(props.dados) ? " text-danger" : ""}`}>
             <th scope="row">{props.index + 1}</th>
             {   
@@ -42,5 +44,14 @@ const Registro = (props: {index: number, dados: ItemBody}) => {
     );
 }
 
-export default Registro;
+const TBody = (props: {registros: Array<ItemBody>}) => {
+    return (
+        <tbody>
+            {props.registros.map((registro: ItemBody, index: number) => {
+              return <Tr key={index} index={index} dados={registro}/>
+            })}
+        </tbody>
+    );
+}
 
+export default TBody;

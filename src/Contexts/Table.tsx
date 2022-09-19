@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useState } from 'react'
-import { DataTable } from '../App/dados';
+import { DataTable } from '../dados';
 
 export const TableContext = createContext({});
 

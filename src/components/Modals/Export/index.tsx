@@ -1,12 +1,12 @@
 import React, { useState, createContext, useContext } from "react";
 import { TableContext } from "../../../Contexts/Table";
 import { ITableContext, ItemBody } from "../../Table/types";
-import InputPrefix from "./InputPrefix";
-import List from "./List";
-import { getCSV, IRow } from "./Templates/csv";
+import InputPrefix from "./components/InputPrefix";
+import List from "./components/List";
+import { getCSV, IRow } from "./templates/csv";
 
 import { ColunaType, ColunaContextType, PrefixContextType } from './types'
-import { numberPhoneColumns } from "../../../App/configs";
+import { numberPhoneColumns } from "../../../configs";
 
 export const ColunaContext = createContext({} as ColunaContextType);
 export const PrefixContext = createContext({} as PrefixContextType);

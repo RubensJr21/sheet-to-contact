@@ -1,5 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
-import { IError } from "./Alert/AlertErrorInput/types"
+
+export interface IError {
+    type: string,
+    message: string,
+}
 
 export interface IInputCsvContext {
     inputCsv: string;

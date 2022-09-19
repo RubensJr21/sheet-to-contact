@@ -1,4 +1,4 @@
-import { ITable, ItemBody, ItemHead } from '../components/Table/types'
+import { ITable, ItemBody, ItemHead } from './components/Table/types'
 
 const numberBetween = (floorNumber: number, topNumber: number) => {
     const numbers = Array.from({length: (topNumber + 1) - floorNumber}, (f, g) => g + floorNumber);

@@ -1,6 +1,5 @@
 import React, { createContext, ReactNode, useState } from 'react'
-import { IErrorContext } from '../components/Main/types';
-import { IError } from '../components/Main/Alert/AlertErrorInput/types';
+import { IError, IErrorContext } from '../components/Main/types';
 
 export const ErrorContext = createContext({} as IErrorContext)
 

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import THead from './THead'
-import TBody from './TBody'
-import ButtonExport from './ButtonExport';
+import THead from './components/THead'
+import TBody from './components/TBody'
+import ButtonExport from './components/ButtonExport';
 
 import { TableContext } from '../../Contexts/Table';
 import { ITableContext } from './types';

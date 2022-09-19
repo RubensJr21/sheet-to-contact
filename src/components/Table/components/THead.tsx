@@ -1,5 +1,13 @@
 import React from "react";
-import Th from './Column';
+
+// Column (Coluna de cabeçalho)
+const Th = (props: {text: string}) => {
+    return (
+        <th scope="col" className="align-middle">
+            {props.text}
+        </th>
+    );
+}
 
 const THead = (props: {colunas: Array<string>}) => {
     return (

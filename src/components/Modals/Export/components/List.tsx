@@ -2,7 +2,7 @@ import React, { ChangeEvent, DragEvent, useContext, useRef } from "react";
 import { ColunaType } from '../types'
 import { ColunaContext } from '../index'
 
-import './index.css'
+import '../index.css'
 
 const List = () => {
     const { colunas, setColunas } = useContext(ColunaContext);
