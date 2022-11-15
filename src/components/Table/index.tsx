@@ -1,21 +1,11 @@
-import React, { useContext } from 'react';
-import THead from './components/THead'
-import TBody from './components/TBody'
+import React, { ReactElement } from 'react';
 import ButtonExport from './components/ButtonExport';
 
-import { TableContext } from '../../Contexts/Table';
-import { ITableContext } from './types';
-
-const Table = () => {
-  const { dataTable : {
-    head: colunas,
-    body: registros
-  } } = useContext(TableContext) as ITableContext
+const Table = (props: { children: Array<ReactElement> }) => {
     return(
       <div className='position-relative vw-100 vh-100 mw-100'>
         <table className="table table-dark table-hover table-bordered">
-          <THead colunas={colunas}/>
-          <TBody registros={registros} />
+          {props.children}
         </table>
         <ButtonExport />
       </div>
