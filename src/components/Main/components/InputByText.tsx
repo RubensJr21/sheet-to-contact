@@ -1,20 +1,20 @@
 import { ChangeEvent, useContext, MouseEvent } from "react";
-import { ErrorContext } from "../../../Contexts/ErrorInput";
-import { InputCsvContext } from "../../../Contexts/InputCsv";
+import { ErrorContext } from "../Contexts/ErrorInput";
+import { InputCsvContext } from "../Contexts/InputCsv";
 import { TableContext } from "../../../Contexts/Table";
 import { ITable, ITableContext } from "../../Table/types";
 import { getHeadAndBody, populateTable, verifyDataCsv } from "../functions/OfInput";
 import { IErrorContext } from "../types";
 
 const InputByText = () => {
-    const { setDataTable } = useContext(TableContext) as ITableContext;
+    const { changeTable } = useContext(TableContext) as ITableContext;
     const { inputCsv, setInputCsv } = useContext(InputCsvContext);
     const { setError } = useContext(ErrorContext) as IErrorContext;
 
     const loadCsv = (lines: Array<Array<string>>) => {
         const { head, body } = getHeadAndBody(lines);
         const table: ITable = populateTable(head, body);
-        setDataTable(table);
+        changeTable(table);
     };
 
     const onTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

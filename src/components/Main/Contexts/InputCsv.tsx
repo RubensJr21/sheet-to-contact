@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useState } from 'react'
-import { IInputCsvContext } from '../components/Main/types';
+import { IInputCsvContext } from '../types';
 
 export const InputCsvContext = createContext({} as IInputCsvContext)
 

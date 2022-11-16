@@ -1,3 +1,10 @@
 .size-export {
     font-size: 1.35rem;
 }
+
+input {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    background-color: transparent;
+}

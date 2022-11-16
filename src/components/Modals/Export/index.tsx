@@ -12,9 +12,7 @@ export const ColunaContext = createContext({} as ColunaContextType);
 export const PrefixContext = createContext({} as PrefixContextType);
 
 const Export = () => {
-	const {
-        dataTable: { head: colunasExt, body: registros }
-    } = useContext(TableContext) as ITableContext;
+	const { dataTable: { head: colunasExt, body: registros } } = useContext(TableContext) as ITableContext;
     
     const colunasToIgnore = numberPhoneColumns
 
@@ -82,7 +80,6 @@ const Export = () => {
 		})
 		const csv = getCSV(r)
 		downloadCSVFile(csv);
-		console.log(csv)
 	}
 
 	return (
@@ -103,7 +100,6 @@ const Export = () => {
 						<PrefixContext.Provider value={{prefix, setPrefix}}>
 							<InputPrefix />
 						</PrefixContext.Provider>
-						* Criar csv de download
 					</ColunaContext.Provider>
 				</div>
 				<div className="modal-footer">

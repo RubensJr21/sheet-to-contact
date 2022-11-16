@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useState } from 'react'
-import { IError, IErrorContext } from '../components/Main/types';
+import { IError, IErrorContext } from '../types';
 
 export const ErrorContext = createContext({} as IErrorContext)
 

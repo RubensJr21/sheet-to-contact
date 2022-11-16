@@ -5,7 +5,7 @@ export interface IRow {
     number: string
 }
 
-export const formatToRow = ({ name, number }: IRow): string => {
+const formatToRow = ({ name, number }: IRow): string => {
     return `${name},${name},,,,,,,,,,,,,,,,,,,,,,,,,,,* myContacts,,${number}`
 }
 

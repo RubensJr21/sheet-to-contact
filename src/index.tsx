@@ -7,7 +7,6 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { TableProvider } from './Contexts/Table';
 
 import App from './App';
-import { FormatProvider } from './Contexts/Format';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,9 +15,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <TableProvider>
-      <FormatProvider>
         <App />
-      </FormatProvider>
     </TableProvider>
   </React.StrictMode>
 );

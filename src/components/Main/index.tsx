@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { ErrorContext } from "../../Contexts/ErrorInput";
-import { InputCsvProvider } from "../../Contexts/InputCsv";
+import { ErrorContext } from "./Contexts/ErrorInput";
+import { InputCsvProvider } from "./Contexts/InputCsv";
 
 import "./index.css";
 import AlertErrorInput from "./components/AlertErrorInput";

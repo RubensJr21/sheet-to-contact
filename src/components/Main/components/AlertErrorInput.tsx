@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { ErrorContext } from "../../../Contexts/ErrorInput";
+import { ErrorContext } from "../Contexts/ErrorInput";
 import { IError, IErrorContext } from "../types";
 
 const AlertErrorInput = (props: { error: IError; time: number }) => {

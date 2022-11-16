@@ -1,21 +1,21 @@
 import { ChangeEvent, useCallback, useContext } from "react";
-import { ErrorContext } from "../../../Contexts/ErrorInput";
+import { ErrorContext } from "../Contexts/ErrorInput";
 import { TableContext } from "../../../Contexts/Table";
 import { ITable, ITableContext } from "../../Table/types";
 import { getHeadAndBody, populateTable, verifyDataCsv } from "../functions/OfInput";
 import { IErrorContext } from "../types";
 
 const InputByInputFile = () => {
-    const { setDataTable } = useContext(TableContext) as ITableContext;
+    const { changeTable } = useContext(TableContext) as ITableContext;
     const { setError } = useContext(ErrorContext) as IErrorContext;
 
     const loadCsv = useCallback(
         (lines: Array<Array<string>>) => {
             const { head, body } = getHeadAndBody(lines);
             const table: ITable = populateTable(head, body);
-            setDataTable(table);
+            changeTable(table);
         },
-        [setDataTable]
+        [changeTable]
     );
 
     const onChange = useCallback(
